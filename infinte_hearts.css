@@ -1,0 +1,42 @@
+canvas {
+  background-color:#312;
+  color:white;
+  height:100%;
+  width:100%;
+  position:absolute;
+  top:0px;
+  z-index: 0;
+}
+
+.main{
+  height:100%;
+  width:100%;
+  display:flex;
+  justify-content: space-evenly;
+}
+
+.text{
+  display:flex;
+  position:absolute;
+  color:white;
+  font-family:Arial;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  z-index: 1; 
+  top:35%;
+}
+
+.home_button{
+  background-color: transparent;
+  border:solid 2px pink;
+  color:white;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius:25px;
+  margin:10px;
+  padding:10px;
+  cursor: pointer;
+}

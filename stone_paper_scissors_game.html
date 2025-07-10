@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>A game for my baby 💘</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', cursive;
+      text-align: center;
+      background: linear-gradient(to right, #ffe6e6, #ffccff);
+      color: #8b005d;
+      padding: 50px;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+      color: #d63384;
+    }
+
+    .subtitle {
+      font-size: 1.3rem;
+      margin-bottom: 30px;
+      color: #a80055;
+    }
+
+    .choices button {
+      background: #ff99cc;
+      border: none;
+      color: white;
+      padding: 15px 25px;
+      margin: 10px;
+      font-size: 1.2rem;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .choices button:hover {
+      background: #ff66b2;
+    }
+
+    .battle, .result, .score, .reward {
+      font-size: 1.6rem;
+      margin-top: 20px;
+    }
+
+    .hand {
+      font-size: 3rem;
+      margin: 10px;
+    }
+
+    .reward {
+      color: #c71585;
+      font-style: italic;
+      margin-top: 10px;
+    }
+
+    .close{
+      /* border:2px solid #ff99cc; */
+      border:none;
+      border-radius:15px;
+      background-color: #ff99cc;
+      font-size: 1.2rem;
+      color:white;
+      padding: 15px 25px;
+      margin: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    
+    .close:hover {
+      background: #ff66b2;
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1>💘 Rock Paper Scissors of Love 💘</h1>
+  <div class="subtitle">Win hearts, earn love tokens! 💝</div>
+
+  <div class="choices">
+    <button onclick="play('rock')">💎 Rock</button>
+    <button onclick="play('paper')">💌 Paper</button>
+    <button onclick="play('scissors')">✂️ Scissors</button>
+  </div>
+
+  <div class="battle" id="battle">🤞 vs 🤞</div>
+  <div class="result" id="result">Ready to play, sweetheart? 💖</div>
+  <div class="score" id="score">Tanu Baby: 0 | Chiuu: 0</div>
+  <div class="reward" id="reward"></div>
+  <!-- <hr> -->
+  <br>
+  <div class="close_section">
+    <a href="mainpage.html">
+    <button class="close"> Back to main website 😍</button>
+    </a>
+  </div>
+  <script>
+    let userScore = 0;
+    let computerScore = 0;
+
+    const handEmojis = {
+      rock: "✊",
+      paper: "✋",
+      scissors: "✌️"
+    };
+
+    const rewardMessages = [
+      "You won a warm hug! 🤗",
+      "A surprise date is coming your way! 🌹",
+      "You just earned a sweet kiss 💋",
+      "Love points doubled! 💞",
+      "You got a chocolate heart! 🍫❤️",
+      "You're irresistible! 😘"
+    ];
+
+    function play(userChoice) {
+      const choices = ['rock', 'paper', 'scissors'];
+      const computerChoice = choices[Math.floor(Math.random() * 3)];
+
+      // Animate hand shuffle
+      const countdown = ["✊", "✋", "✌️"];
+      let index = 0;
+      document.getElementById("result").textContent = "Hands in the air... ❤️";
+      document.getElementById("reward").textContent = "";
+
+      const interval = setInterval(() => {
+        const emoji = countdown[index % countdown.length];
+        document.getElementById("battle").innerHTML = `${emoji} vs ${emoji}`;
+        index++;
+        if (index === 6) {
+          clearInterval(interval);
+          showResult(userChoice, computerChoice);
+        }
+      }, 200);
+    }
+
+    function showResult(userChoice, computerChoice) {
+      const userEmoji = handEmojis[userChoice];
+      const compEmoji = handEmojis[computerChoice];
+      document.getElementById("battle").innerHTML = `${userEmoji} vs ${compEmoji}`;
+
+      let result = "";
+      let rewardText = "";
+
+      if (userChoice === computerChoice) {
+        result = "It's a tie! We think alike 😍";
+      } else if (
+        (userChoice === 'rock' && computerChoice === 'scissors') ||
+        (userChoice === 'paper' && computerChoice === 'rock') ||
+        (userChoice === 'scissors' && computerChoice === 'paper')
+      ) {
+        userScore++;
+        result = `You win this round! 💖 ${userChoice} beats ${computerChoice}`;
+        rewardText = rewardMessages[Math.floor(Math.random() * rewardMessages.length)];
+      } else {
+        computerScore++;
+        result = `Oh no! ${computerChoice} beats ${userChoice} 😢`;
+      }
+
+      document.getElementById("result").textContent = result;
+      document.getElementById("score").textContent = `Tanu baby: ${userScore} | Chiuu: ${computerScore}`;
+      document.getElementById("reward").textContent = rewardText;
+    }
+  </script>
+
+</body>
+</html>
